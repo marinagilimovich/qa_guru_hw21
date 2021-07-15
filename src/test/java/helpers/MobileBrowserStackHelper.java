@@ -1,20 +1,18 @@
 package helpers;
 
 
-import config.BrowserstackConfig;
-
 import java.net.MalformedURLException;
 import java.net.URL;
 
-import static config.ProjectData.browserStackConfig;
+import static config.MobileProjectData.BROWSER_STACK_CONFIG_MOBILE;
 import static io.restassured.RestAssured.given;
 
-public class BrowserStackHelper {
+public class MobileBrowserStackHelper {
 
     public static URL getBrowserstackUrl() {
         try {
-            return new URL(String.format(browserStackConfig.url(), browserStackConfig.bsLogin(),
-                    browserStackConfig.bsPassword()));
+            return new URL(String.format(BROWSER_STACK_CONFIG_MOBILE.url(), BROWSER_STACK_CONFIG_MOBILE.bsLogin(),
+                    BROWSER_STACK_CONFIG_MOBILE.bsPassword()));
         } catch (MalformedURLException e) {
             throw new RuntimeException(e);
         }
@@ -22,9 +20,9 @@ public class BrowserStackHelper {
 
     public static String getBrowserstackVideoUrl(String sessionId) {
         String video_url = given()
-                .auth().basic(browserStackConfig.bsLogin(), browserStackConfig.bsPassword())
+                .auth().basic(BROWSER_STACK_CONFIG_MOBILE.bsLogin(), BROWSER_STACK_CONFIG_MOBILE.bsPassword())
                 .when()
-                .get(browserStackConfig.sessionsUrl() + sessionId + ".json")
+                .get(BROWSER_STACK_CONFIG_MOBILE.sessionsUrl() + sessionId + ".json")
                 .then()
                 .statusCode(200)
                 .extract()
@@ -37,9 +35,9 @@ public class BrowserStackHelper {
 
     public static String getBSPublicLink(String sessionId) {
         String publicUrl = given()
-                .auth().basic(browserStackConfig.bsLogin(), browserStackConfig.bsPassword())
+                .auth().basic(BROWSER_STACK_CONFIG_MOBILE.bsLogin(), BROWSER_STACK_CONFIG_MOBILE.bsPassword())
                 .when()
-                .get(browserStackConfig.sessionsUrl() + sessionId + ".json")
+                .get(BROWSER_STACK_CONFIG_MOBILE.sessionsUrl() + sessionId + ".json")
                 .then()
                 .statusCode(200)
                 .extract()

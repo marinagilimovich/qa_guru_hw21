@@ -7,9 +7,9 @@ import static org.aeonbits.owner.Config.LoadType.MERGE;
 @Config.LoadPolicy(MERGE)
 @Config.Sources({
         "system:properties",
-        "classpath:config/browser_stack.properties"
+        "classpath:config/mobileBrowserStack.properties"
 })
-public interface BrowserstackConfig extends Config {
+public interface MobileBrowserstackConfig extends Config {
     @Key("bs.url")
     String url();
 

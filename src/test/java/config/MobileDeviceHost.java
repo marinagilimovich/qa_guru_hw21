@@ -1,6 +1,6 @@
 package config;
 
-public enum DeviceHost {
+public enum MobileDeviceHost {
     BROWSER_STACK,
     LOCAL,
     SELENOID

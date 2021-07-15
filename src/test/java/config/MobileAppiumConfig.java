@@ -10,9 +10,9 @@ import static org.aeonbits.owner.Config.LoadType.MERGE;
 @Config.Sources({
         "system:properties",
         "classpath:config/${device.host}.properties",
-        "classpath:config/local.properties"
+        "classpath:config/mobileLocal.properties"
 })
-public interface AppiumConfig extends Config {
+public interface MobileAppiumConfig extends Config {
 
     @Key("appium.server.url")
     String appiumServerUrl();

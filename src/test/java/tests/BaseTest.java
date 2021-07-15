@@ -1,11 +1,11 @@
 package tests;
 
 import com.codeborne.selenide.Configuration;
-import config.DeviceHost;
-import config.ProjectData;
-import drivers.AndroidMobileDriver;
-import helpers.AttachHelper;
-import helpers.BrowserStackHelper;
+import config.MobileDeviceHost;
+import config.MobileProjectData;
+import drivers.MobileAndroidMobileDriver;
+import helpers.MobileAttachHelper;
+import helpers.MobileBrowserStackHelper;
 import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
@@ -14,7 +14,7 @@ import org.junit.jupiter.api.BeforeEach;
 import static com.codeborne.selenide.Selenide.closeWebDriver;
 import static com.codeborne.selenide.Selenide.open;
 import static com.codeborne.selenide.logevents.SelenideLogger.addListener;
-import static helpers.AttachHelper.getSessionId;
+import static helpers.MobileAttachHelper.getSessionId;
 
 public class BaseTest {
 
@@ -22,7 +22,7 @@ public class BaseTest {
     public static void setup() {
         addListener("AllureSelenide", new AllureSelenide());
 
-        Configuration.browser = AndroidMobileDriver.class.getName();
+        Configuration.browser = MobileAndroidMobileDriver.class.getName();
         Configuration.startMaximized = false;
         Configuration.browserSize = null;
         Configuration.timeout = 10000;
@@ -35,14 +35,14 @@ public class BaseTest {
 
     @AfterEach
     public void afterEach() {
-        AttachHelper.screenshotAs("Last screenshot");
+        MobileAttachHelper.screenshotAs("Last screenshot");
 
-        if (!ProjectData.deviceHost().equals(DeviceHost.LOCAL)) {
+        if (!MobileProjectData.deviceHost().equals(MobileDeviceHost.LOCAL)) {
             String sessionId = getSessionId();
-            AttachHelper.attachVideo(sessionId);
-            if (ProjectData.deviceHost().equals(DeviceHost.BROWSER_STACK))
-                AttachHelper.attachAsText("Browserstack build link",
-                        BrowserStackHelper.getBSPublicLink(sessionId));
+            MobileAttachHelper.attachVideo(sessionId);
+            if (MobileProjectData.deviceHost().equals(MobileDeviceHost.BROWSER_STACK))
+                MobileAttachHelper.attachAsText("Browserstack build link",
+                        MobileBrowserStackHelper.getBSPublicLink(sessionId));
         }
 
         closeWebDriver();
